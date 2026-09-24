@@ -2,44 +2,53 @@
 
 ## Descripción
 
-Proyecto de infraestructura desarrollado utilizando Docker Compose.
+Este proyecto implementa una infraestructura utilizando Docker Compose.
 
-Se implementan dos ambientes independientes:
+La solución cuenta con dos ambientes independientes:
 
 - DEV
 - QA
 
-Cada ambiente cuenta con:
+Cada ambiente contiene los siguientes servicios:
 
-- Frontend con Nginx
-- Backend con Node.js
-- Base de datos PostgreSQL
+- Frontend utilizando Nginx.
+- Backend desarrollado con Node.js y Express.
+- Base de datos PostgreSQL.
+
+El objetivo es realizar una replicación de servicios mediante contenedores Docker para contar con ambientes separados de desarrollo y pruebas.
 
 
 ## Arquitectura
 
-Ambiente DEV:
-
-Frontend:
-Puerto 4001
-
-Backend:
-Puerto 4002
-
-Base de datos:
-Puerto 4003
+La infraestructura implementada es la siguiente:
 
 
-Ambiente QA:
+## Ambiente DEV
 
-Frontend:
-Puerto 5001
+Servicios:
 
-Backend:
-Puerto 5002
+- Frontend Nginx
+  - Puerto: 4001
 
-Base de datos:
-Puerto 5003
+- Backend Node.js
+  - Puerto: 4002
+
+- Base de datos PostgreSQL
+  - Puerto: 4003
+
+
+## Ambiente QA
+
+Servicios:
+
+- Frontend Nginx
+  - Puerto: 5001
+
+- Backend Node.js
+  - Puerto: 5002
+
+- Base de datos PostgreSQL
+  - Puerto: 5003
 
 
 ## Tecnologías utilizadas
@@ -49,19 +58,19 @@ Puerto 5003
 - Node.js
 - Express
 - Nginx
-- PostgreSQL
+- PostgreSQL 17
 
 
 ## Estructura del proyecto
 
 infraestructura-docker
 
-backend/
+backend
 - Dockerfile
 - index.js
 - package.json
 
-frontend/
+frontend
 - Dockerfile
 - index.html
 
@@ -70,48 +79,78 @@ docker-compose.yml
 README.md
 
 
-## Ejecución del proyecto
-
-1. Clonar el repositorio:
-
-git clone URL_DEL_REPOSITORIO
+## Instalación y ejecución
 
 
-2. Ingresar a la carpeta del proyecto:
+### 1. Descargar el repositorio
+
+Ejecutar:
+
+git clone https://github.com/marielsysm19-cpu/infraestructura-docker.git
+
+
+### 2. Ingresar al proyecto
+
+Ejecutar:
 
 cd infraestructura-docker
 
 
-3. Construir y ejecutar los servicios:
+### 3. Construir y levantar los servicios
+
+Ejecutar:
 
 docker compose up -d --build
 
 
-## Verificar contenedores
+Este comando crea las imágenes Docker, redes, volúmenes y contenedores necesarios para ejecutar los ambientes DEV y QA.
 
-Ejecutar:
+
+## Verificación
+
+Para verificar que los servicios estén funcionando:
 
 docker compose ps
 
 
-## Servicios disponibles
-
+Servicios esperados:
 
 DEV:
 
-Frontend:
-http://localhost:4001
-
-Backend:
-http://localhost:4002
+- web-dev
+- api-dev
+- bd-dev
 
 
 QA:
 
+- web-qa
+- api-qa
+- bd-qa
+
+
+## Acceso a los servicios
+
+
+### DEV
+
 Frontend:
+
+http://localhost:4001
+
+Backend:
+
+http://localhost:4002
+
+
+### QA
+
+Frontend:
+
 http://localhost:5001
 
 Backend:
+
 http://localhost:5002
 
 
@@ -132,7 +171,7 @@ Las bases de datos utilizan volúmenes Docker para mantener la persistencia:
 
 ## Conventional Commits
 
-Los commits utilizados siguen la siguiente estructura:
+Los cambios del proyecto utilizan la convención:
 
 feat: implementación de nuevas funcionalidades
 
@@ -141,6 +180,15 @@ fix: corrección de errores
 docs: actualización de documentación
 
 
+Ejemplos:
+
+feat: create docker infrastructure
+
+docs: update README
+
+
 ## Conclusión
 
-La infraestructura permite ejecutar dos ambientes replicados mediante Docker Compose, facilitando la administración y despliegue de los servicios.
+La infraestructura permite ejecutar dos ambientes replicados mediante Docker Compose.
+
+Cada ambiente cuenta con frontend, backend y base de datos independientes, facilitando la administración y despliegue de servicios mediante contenedores Docker.
