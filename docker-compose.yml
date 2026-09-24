@@ -1,0 +1,95 @@
+services:
+
+
+#  DEV
+
+  web-dev:
+    container_name: web-dev
+    build:
+      context: ./frontend
+    ports:
+      - "4001:80"
+
+
+  api-dev:
+    container_name: api-dev
+    build:
+      context: ./backend
+    ports:
+      - "4002:3000"
+
+
+  bd-dev:
+    container_name: bd-dev
+    image: postgres:17
+
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: dev_database
+
+    ports:
+      - "4003:5432"
+
+    volumes:
+      - postgres_dev:/var/lib/postgresql/data
+
+
+
+#  QA
+
+
+  web-qa:
+    container_name: web-qa
+
+    build:
+      context: ./frontend
+
+    ports:
+      - "5001:80"
+
+
+
+  api-qa:
+    container_name: api-qa
+
+    build:
+      context: ./backend
+
+    ports:
+      - "5002:3000"
+
+
+
+  bd-qa:
+    container_name: bd-qa
+
+    image: postgres:17
+
+
+    environment:
+
+      POSTGRES_USER: admin
+
+      POSTGRES_PASSWORD: 123456
+
+      POSTGRES_DB: qa_database
+
+
+    ports:
+
+      - "5003:5432"
+
+
+    volumes:
+
+      - postgres_qa:/var/lib/postgresql/data
+
+
+
+
+volumes:
+
+  postgres_dev:
+
+  postgres_qa:
